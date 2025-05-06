@@ -83,7 +83,4 @@ def main():
         t.join()
 
 if __name__ == "__main__":
-    mainthread = threading.Thread(target=main)
-    mainthread.start()
-    mainthread.join()
-    app.run(host='0.0.0.0', port=5000)
+    main()
