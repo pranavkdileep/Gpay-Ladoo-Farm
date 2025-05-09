@@ -45,7 +45,7 @@ def send_request(url):
         else:
             imageurl = 'No image URL found'
         if title != 'No title found' and title != 'Can you gift me a Sparky Laddoo?':
-            send_telegram_message(f"{title} - {url}")
+            send_telegram_message(f"{title} - {url} \n{imageurl}")
             with open('urls.txt', 'a') as file:
                 file.write(f"{imageurl} - {url}\n")
             return {
@@ -59,6 +59,8 @@ def send_request(url):
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
+    
+
 
 def worker():
     while True:
@@ -68,7 +70,7 @@ def worker():
 
 def main():
     try:
-        num_threads = 100
+        num_threads = 300
     except ValueError:
         print("Invalid input. Please enter an integer.")
         return
