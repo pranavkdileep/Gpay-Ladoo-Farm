@@ -7,8 +7,7 @@ import threading
 globlerror = ''
 
 
-def send_telegram_message(msg):
-    bot_token = '6408802782:AAF0J0pTg_tpAmzLmqy2B54i8d--97y9Q6g'
+def send_telegram_message(msg,bot_token):
     chat_id = '1196575861'
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
 
@@ -41,7 +40,10 @@ def send_request(url):
         else:
             imageurl = 'No image URL found'
         if title != 'No title found' and title != 'Can you gift me a Sparky Laddoo?':
-            send_telegram_message(f"{title} - {url} \n{imageurl}")
+            if title == 'Psst… here’s a Laddoo for you':
+                send_telegram_message(f"{title.replace('Laddoo',imageurl.split('_')[3])} - {url}","6751220448:AAFadIlauelNBy8B7hUxy6ViKAyXHaCTzho")
+            else:
+                send_telegram_message(f"{title} - {url}","6408802782:AAF0J0pTg_tpAmzLmqy2B54i8d--97y9Q6g")
             with open('urls.txt', 'a') as file:
                 file.write(f"{imageurl} - {url}\n")
             return {
@@ -53,10 +55,12 @@ def send_request(url):
             print("Title is either 'No title found' or 'Can you gift me a Sparky Laddoo?'")
             return None
     except Exception as e:
-        print(f"An error occurred new code: {e}")
+        print(f"An error occurred new code 1: {e}")
         global globlerror
         globlerror = str(e)
         return None
+    
+
 
 def worker():
     while True:
