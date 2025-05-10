@@ -41,7 +41,7 @@ def send_request(url):
         else:
             imageurl = 'No image URL found'
         if title != 'No title found' and title != 'Can you gift me a Sparky Laddoo?':
-            send_telegram_message(f"{title} - {url}")
+            send_telegram_message(f"{title} - {url} \n{imageurl}")
             with open('urls.txt', 'a') as file:
                 file.write(f"{imageurl} - {url}\n")
             return {
@@ -53,7 +53,7 @@ def send_request(url):
             print("Title is either 'No title found' or 'Can you gift me a Sparky Laddoo?'")
             return None
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred new code: {e}")
         global globlerror
         globlerror = str(e)
         return None

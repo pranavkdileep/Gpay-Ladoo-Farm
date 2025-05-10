@@ -61,7 +61,6 @@ def send_request(url):
         return None
     
 
-
 def worker():
     while True:
         base_url = "https://gpay.app.goo.gl/"
