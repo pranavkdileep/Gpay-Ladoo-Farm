@@ -40,7 +40,7 @@ def send_request(url):
         else:
             imageurl = 'No image URL found'
         if title != 'No title found' and title != 'Can you gift me a Sparky Laddoo?':
-            if title == 'Psst… here’s a Laddoo for you':
+            if title == 'Psst… here’s a Laddoo for you' and (imageurl.split('_')[3] != 'Elastic' and imageurl.split('_')[3] != 'Steady' and imageurl.split('_')[3] != 'Sunny'):
                 send_telegram_message(f"{title.replace('Laddoo',imageurl.split('_')[3])} - {url}","6751220448:AAFadIlauelNBy8B7hUxy6ViKAyXHaCTzho")
             else:
                 send_telegram_message(f"{title} - {url}","6408802782:AAF0J0pTg_tpAmzLmqy2B54i8d--97y9Q6g")
@@ -60,7 +60,6 @@ def send_request(url):
         globlerror = str(e)
         return None
     
-
 
 def worker():
     while True:

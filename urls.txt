@@ -3,3 +3,5 @@ Request_Convo_Card_Steady - https://gpay.app.goo.gl/QJvkXu
 Request_Convo_Card_Steady - https://gpay.app.goo.gl/sJ7nNL
 Request_Convo_Card_Steady - https://gpay.app.goo.gl/sJ7nNL
 Request_Convo_Card_Dizzy - https://gpay.app.goo.gl/6pRFfF
+Request_Convo_Card_Sunny - https://gpay.app.goo.gl/TTx4MN
+Request_Convo_Card_Wally - https://gpay.app.goo.gl/fGSdsW
