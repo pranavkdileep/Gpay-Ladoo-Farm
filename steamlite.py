@@ -40,8 +40,10 @@ def send_request(url):
         else:
             imageurl = 'No image URL found'
         if title != 'No title found' and title != 'Can you gift me a Sparky Laddoo?':
-            if title == 'Psst… here’s a Laddoo for you' and (imageurl.split('_')[3] != 'Elastic' and imageurl.split('_')[3] != 'Steady' and imageurl.split('_')[3] != 'Sunny'):
+            if title == 'Psst… here’s a Laddoo for you' and (imageurl.split('_')[3] == 'Zen'):
                 send_telegram_message(f"{title.replace('Laddoo',imageurl.split('_')[3])} - {url}","6751220448:AAFadIlauelNBy8B7hUxy6ViKAyXHaCTzho")
+            if title == 'Psst… here’s a Laddoo for you' and (imageurl.split('_')[3] != 'Elastic' and imageurl.split('_')[3] != 'Steady' and imageurl.split('_')[3] != 'Sunny'):
+                send_telegram_message(f"{title.replace('Laddoo',imageurl.split('_')[3])} - {url}","6408802782:AAF0J0pTg_tpAmzLmqy2B54i8d--97y9Q6g")
             else:
                 send_telegram_message(f"{title} - {url}","6408802782:AAF0J0pTg_tpAmzLmqy2B54i8d--97y9Q6g")
             with open('urls.txt', 'a') as file:
@@ -55,7 +57,7 @@ def send_request(url):
             print("Title is either 'No title found' or 'Can you gift me a Sparky Laddoo?'")
             return None
     except Exception as e:
-        print(f"An error occurred new code 1: {e}")
+        print(f"An error occurred new code 21: {e}")
         global globlerror
         globlerror = str(e)
         return None
@@ -69,7 +71,7 @@ def worker():
 
 def main():
     try:
-        num_threads = 100
+        num_threads = 300
     except ValueError:
         print("Invalid input. Please enter an integer.")
         return
