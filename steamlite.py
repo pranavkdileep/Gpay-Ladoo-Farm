@@ -35,26 +35,33 @@ def send_request(url):
         soup = bs4.BeautifulSoup(html_content, 'html.parser')
         title = soup.title.string if soup.title else 'No title found'
         imageurl = soup.find('meta', property='og:image')
-        if imageurl:
-            imageurl = imageurl['content'].split('&')[1].split('@')[0]
+        if imageurl and 'content' in imageurl.attrs:
+            content = imageurl['content']
+
+            # Handle '&'
+            if '&' in content:
+                parts = content.split('&')
+                if len(parts) > 1:
+                    content = parts[1]
+                else:
+                    content = parts[0]
+
+            # Handle '@'
+            if '@' in content:
+                content = content.split('@')[0]
+
+            imageurl = content
         else:
             imageurl = 'No image URL found'
-        if title != 'No title found' and title != 'Can you gift me a Sparky Laddoo?':
-            if title == 'Psst… here’s a Laddoo for you' and (imageurl.split('_')[3] == 'Zen'):
-                send_telegram_message(f"{title.replace('Laddoo',imageurl.split('_')[3])} - {url}","6751220448:AAFadIlauelNBy8B7hUxy6ViKAyXHaCTzho")
-            if title == 'Psst… here’s a Laddoo for you' and (imageurl.split('_')[3] != 'Elastic' and imageurl.split('_')[3] != 'Steady' and imageurl.split('_')[3] != 'Sunny'):
-                send_telegram_message(f"{title.replace('Laddoo',imageurl.split('_')[3])} - {url}","6408802782:AAF0J0pTg_tpAmzLmqy2B54i8d--97y9Q6g")
-            else:
-                send_telegram_message(f"{title} - {url}","6408802782:AAF0J0pTg_tpAmzLmqy2B54i8d--97y9Q6g")
-            with open('urls.txt', 'a') as file:
-                file.write(f"{imageurl} - {url}\n")
+        if title != 'No title found' and title == 'Psst… here’s a bonus tick for you!':
+            send_telegram_message(f"{title} - {url} \n{imageurl}",'6408802782:AAF0J0pTg_tpAmzLmqy2B54i8d--97y9Q6g')
             return {
                 'title': title,
                 'imageurl': imageurl,
                 'url': url
             }
         else:
-            print("Title is either 'No title found' or 'Can you gift me a Sparky Laddoo?'")
+            print(title)
             return None
     except Exception as e:
         print(f"An error occurred new code 21: {e}")
