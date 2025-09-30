@@ -53,7 +53,7 @@ def send_request(url):
             imageurl = content
         else:
             imageurl = 'No image URL found'
-        if title != 'No title found' and title == 'Psst… here’s a bonus tick for you!':
+        if title != 'No title found' and 'tick for you!' in title:
             send_telegram_message(f"{title} - {url} \n{imageurl}",'6408802782:AAF0J0pTg_tpAmzLmqy2B54i8d--97y9Q6g')
             return {
                 'title': title,
