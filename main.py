@@ -40,26 +40,40 @@ def send_request(url):
         soup = bs4.BeautifulSoup(html_content, 'html.parser')
         title = soup.title.string if soup.title else 'No title found'
         imageurl = soup.find('meta', property='og:image')
-        if imageurl:
-            imageurl = imageurl['content'].split('&')[1].split('@')[0]
+        print(imageurl,url)
+        if imageurl and 'content' in imageurl.attrs:
+            content = imageurl['content']
+
+            # Handle '&'
+            if '&' in content:
+                parts = content.split('&')
+                if len(parts) > 1:
+                    content = parts[1]
+                else:
+                    content = parts[0]
+
+            # Handle '@'
+            if '@' in content:
+                content = content.split('@')[0]
+
+            imageurl = content
         else:
             imageurl = 'No image URL found'
-        if title != 'No title found' and title != 'Can you gift me a Sparky Laddoo?':
+
+        if title != 'No title found' and title == 'Psst… here’s a bonus tick for you!':
             send_telegram_message(f"{title} - {url} \n{imageurl}")
-            with open('urls.txt', 'a') as file:
-                file.write(f"{imageurl} - {url}\n")
             return {
                 'title': title,
                 'imageurl': imageurl,
                 'url': url
             }
         else:
-            print("Title is either 'No title found' or 'Can you gift me a Sparky Laddoo?'")
+            print(title)
             return None
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
-    
+
 
 def worker():
     while True:
